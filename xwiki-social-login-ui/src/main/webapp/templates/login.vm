@@ -35,7 +35,6 @@
   #set($providers = $services.socialAuth.availableProviders)
   #if($providers.size() > 0 && $services.socialAuth.loginButtonsEnabled)
     #set($socialLoginButtonsEnabled = true)
-    #set($ok = $xwiki.ssx.use('XWiki.SocialLogin'))
   #end
 #end
 #if($socialLoginButtonsEnabled)
