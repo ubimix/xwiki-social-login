@@ -505,7 +505,15 @@ public class DefaultSocialAuthManager implements SocialAuthenticationManager, So
         properties.put("active", "1");
         properties.put("email", profile.getEmail());
         properties.put("first_name", profile.getFirstName());
-        properties.put("last_name", profile.getLastName());
+        
+        //Some social networks (eg Twitter) return only a fullName, no firstName / lastName.
+        //In that case, store the fullName as the lastName.
+        String lastName = profile.getLastName();
+        if (lastName == null || lastName.trim().length() ==0) 
+            lastName = profile.getFullName();
+        properties.put("last_name", lastName);
+
+        
         // We don't put the same password as the one of the social profile
         properties.put("password", getContext().getWiki().generateRandomString(16));
 
